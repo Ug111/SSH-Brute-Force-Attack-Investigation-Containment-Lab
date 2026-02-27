@@ -29,7 +29,8 @@ The objective shows important aspects like:
 	•	Monitoring Source: /var/log/auth.log
 	•	Firewall Tool: iptables
 	•	Network Type: Local VM network
-
+    •   Skill Level: SOC Analyst (ENTRY-LEVEL Simulation)
+	•   MITRE ATT&CK: T1110 Brute-force
  ## 🚨 Incident Detection
  # Command used:
   sudo grep "Failed password" /var/log/auth.log
@@ -58,7 +59,7 @@ The objective shows important aspects like:
   sudo grep "192.168.1.100" /var/log/auth.l
   Observation:
   • Attempts clustered within short time intervals
-  • Baehavior consistent with automated brute-force script
+  • Behavior consistent with automated brute-force script
 
   Conclusion:
   Attack was automated, not manual.
@@ -88,7 +89,7 @@ No confirmed system was compromised.
 
 ## 🛑 Block the Highest attacking IP Address
 Primary attacking IP "192.168.1.100" was blocked:
-# Command used:06_
+# Command used:
 sudo iptables -A INPUT -s 192.168.1.100 -p tcp --dport 22 -j DROP
 
 Observation:
@@ -101,9 +102,8 @@ Host-based firewall enforcement
 sudo iptables -L INPUT --line-numbers -n
 Proof of Containment
 Observation:
-• DROP
-• Source IP
-• dpt:22
+• Implemented host-based firewall rules (iptables)
+• Confirmed blocking effectiveness
 
 Conclusion:
 ✅ Containment successful.
@@ -113,14 +113,17 @@ Conclusion:
 # command used:
 sudo iptables-save | grep 192.168
 Observation:
-First install iptables-persistent, then with save netfilter-persistent save 
+• Enabled persistent firewall configuration
+• identified root cause (exposed passsword authentication)
 
 Conclusion: 
-• Confirmatiom rules are saved
+• Recommended defensive improvements (Key-based authentication)
 • IPs appear in saved config
 ![Persistent Confirmation](screenshot:08_persistent_firewall_rules.png)
 
-
+## 📖 Lesson Learned:
+Starting from log monitoring and analysis, early detection identified numerous attacks but with the effective activation and automation of firewall,
+potential compromise was avoided, layered defensive controls are critical when exposing SSH serrvices.
 
   
   
