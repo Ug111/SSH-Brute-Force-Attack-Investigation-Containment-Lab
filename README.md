@@ -1,4 +1,19 @@
 # SSH-Brute-Force-Attack-Investigation-Containment-Lab
+ssh-bruteforce-soc-lab/
+│
+├── README.md
+├── commands_used.md
+│
+└── evidence/
+    ├── 01_failed_log_entries.png
+    ├── 02_failed_attempts_by_source_ip.png
+    ├── 03_attack_timeline_192.168.1.100.png
+    ├── 04_failed_login_attempts_by_username.png
+    ├── 05_confirmation_of_no_successful_compromise.png
+    ├── 06_blocking_highest_attacking_ip.png
+    ├── 07_firewall_rules_after_containment.png
+    └── 08_persistent_firewall_rules.png
+
 This  project demonstrates a hands-on investigation of SSH brute-force activity on Ubuntu server: 
 The objective shows important aspects like:
  • identify suspicious authentication activity
@@ -15,9 +30,8 @@ The objective shows important aspects like:
 	•	Firewall Tool: iptables
 	•	Network Type: Local VM network
 
-  🚨 Incident Detection
-  Command used:
-  #'''bash
+ ## 🚨 Incident Detection
+ # Command used:
   sudo grep "Failed password" /var/log/auth.log
   Observation:
   • Multiple failed login attempts 
@@ -26,23 +40,21 @@ The objective shows important aspects like:
 
   Conclusion:
   Brute-force activity detected).
-  (screenshot:01_Failed_login_entries.png)
+  ![Failed Log Entries](screenshot:01_Failed_login_entries.png)
 
-  🌍 Attacker Attribution (Source IP Analysis)
-  Command used:
-  #'''bash
+ ## 🌍 Attacker Attribution (Source IP Analysis)
+ # Command used:
   sudo grep "Failed password" /var/log/auth.log | grep -oP 'from \K[0-9.]+' | sort | uniq -c 
-  Result:
+  Observation:
   • 21 attempts from IP 192.168.1.100 (highest)
   • 15 attempts from IP 192.168.1.200
   
   Conclusion:
   IP 192.168.1.100 is identified as primary attacker
-  (Screenshot:02_failed_attempts_by_source_ip.png)
+  ![Attacker Attribution](Screenshot:02_failed_attempts_by_source_ip.png)
 
-  ⏱ Attack Timeline Analysis
-  Command used:
-  #'''bash
+ ## ⏱ Attack Timeline Analysis
+ # Command used:
   sudo grep "192.168.1.100" /var/log/auth.l
   Observation:
   • Attempts clustered within short time intervals
@@ -50,65 +62,63 @@ The objective shows important aspects like:
 
   Conclusion:
   Attack was automated, not manual.
-  (screenshot:03_attack_timeline_192.168.1.100.png)
+  ![Attack Timeline](screenshot:03_attack_timeline_192.168.1.100.png)
 
-  👤 Username Targeting Analysis
-  Command used:
- #'''bash
+ ## 👤 Username Targeting Analysis
+ # Command used:
  sudo grep "Failed password" /var/log/auth.log | grep -oP 'for (invalid user )?\K\S+' | sort | uniq -c
- Findings:
+ Observation:
  • Multiple invalid username targeted
  • Indicates credentials enumeration attempt
- (screenshot:04_failed_login_attempts_by_username.png)
 
- Assessment:
+Conclusion:
  Attacker was attempting username discovery prior to successful authentication.
+![Username Targeting](screenshot:04_failed_login_attempts_by_username.png)
 
-🔍 Impact Assessment
-Command used:
-#'''bash
+## 🔍 Impact Assessment
+# Command used:
 sudo grep "Accepted password" /var/log/auth.log
 
-Result:
+Observation:
 No suucessful authentication from identified attacker IP addresses.
 
 Conclusion:
 No confirmed system was compromised.
-(screenshot:05_no_confirmation_of_no_successful_compromise.png)
+![Impact Assessment](screenshot:05_no_confirmation_of_no_successful_compromise.png)
 
-🛑 Block the Highest attacking IP Address
+## 🛑 Block the Highest attacking IP Address
 Primary attacking IP "192.168.1.100" was blocked:
-Command used:06_
-#'''bash
-sudo iptables -A input -s 192.168.1.100 -p tcp --dport 22 -j DROP
+# Command used:06_
+sudo iptables -A INPUT -s 192.168.1.100 -p tcp --dport 22 -j DROP
 
-Result:
+Observation:
 Host-based firewall enforcement
-(screenshot:blocking_the_attacking_ip_address.png)
+![Block Highest IP](screenshot:blocking_the_attacking_ip_address.png)
 
 
-🚨 Verified Firewall Rule were Applied
-Command used:
-#'''bash
+## 🚨 Verified Firewall Rule were Applied
+# Command used:
 sudo iptables -L INPUT --line-numbers -n
 Proof of Containment
-Shown:
+Observation:
 • DROP
 • Source IP
 • dpt:22
+
+Conclusion:
 ✅ Containment successful.
-(Screenshot:07_firewall_rule_after_containment.png)
+![Verified Firewall Rule](Screenshot:07_firewall_rule_after_containment.png)
 
-Persistent Confirmation
-command used:
-First install iptables-persistent, then save netfilter-persistent save 
-#'''bash
+## Persistent Confirmation
+# command used:
 sudo iptables-save | grep 192.168
+Observation:
+First install iptables-persistent, then with save netfilter-persistent save 
 
-Result: 
+Conclusion: 
 • Confirmatiom rules are saved
 • IPs appear in saved config
-(screenshot:08_persistent_firewall_rules.png)
+![Persistent Confirmation](screenshot:08_persistent_firewall_rules.png)
 
 
 
