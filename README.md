@@ -63,7 +63,7 @@ The objective shows important aspects like:
 
   Conclusion:
   Attack was automated, not manual.
-  ![Attack Timeline](screenshot:03_attack_timeline_192.168.1.100.png)
+  ![Attack Timeline](screenshots/03_attack_timeline_192.168.1.100.png)
 
  ## 👤 Username Targeting Analysis
  # Command used:
