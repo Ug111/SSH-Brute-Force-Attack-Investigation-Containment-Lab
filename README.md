@@ -74,7 +74,7 @@ The objective shows important aspects like:
 
 Conclusion:
  Attacker was attempting username discovery prior to successful authentication.
-![Username Targeting](screenshot:04_failed_login_attempts_by_username.png)
+![Username Targeting](screenshots/04_failed_login_attempts_by_username.png)
 
 ## 🔍 Impact Assessment
 # Command used:
