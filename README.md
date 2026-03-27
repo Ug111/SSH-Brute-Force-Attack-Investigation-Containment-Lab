@@ -41,7 +41,7 @@ The objective shows important aspects like:
 
   Conclusion:
   Brute-force activity detected).
-  ![Failed Log Entries](screenshot:01_Failed_login_entries.png)
+  ![Failed Log Entries](screenshots/01_failed_log_entries.png)
 
  ## 🌍 Attacker Attribution (Source IP Analysis)
  # Command used:
