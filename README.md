@@ -94,7 +94,7 @@ sudo iptables -A INPUT -s 192.168.1.100 -p tcp --dport 22 -j DROP
 
 Observation:
 Host-based firewall enforcement
-![Block Highest IP](screenshot:blocking_the_attacking_ip_address.png)
+![Block Highest IP](screenshots/06_blocking_the_highest_attacking_ip.png)
 
 
 ## 🚨 Verified Firewall Rule were Applied
@@ -114,9 +114,7 @@ Conclusion:
 sudo iptables-save | grep 192.168
 Observation:
 • Enabled persistent firewall configuration
-• identified root cause (exposed passsword authentication)
-
-Conclusion: 
+• identified root cause (exposed passsword authenticationConclusion: 
 • Recommended defensive improvements (Key-based authentication)
 • IPs appear in saved config
 ![Persistent Confirmation](screenshot:08_persistent_firewall_rules.png)
