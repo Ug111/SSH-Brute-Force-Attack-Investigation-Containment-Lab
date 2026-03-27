@@ -85,7 +85,7 @@ No suucessful authentication from identified attacker IP addresses.
 
 Conclusion:
 No confirmed system was compromised.
-![Impact Assessment](screenshot:05_no_confirmation_of_no_successful_compromise.png)
+![Impact Assessment](screenshots/05_confirmation_of_no_successful_compromise.png)
 
 ## 🛑 Block the Highest attacking IP Address
 Primary attacking IP "192.168.1.100" was blocked:
