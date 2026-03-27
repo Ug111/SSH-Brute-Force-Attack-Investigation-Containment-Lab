@@ -52,7 +52,7 @@ The objective shows important aspects like:
   
   Conclusion:
   IP 192.168.1.100 is identified as primary attacker
-  ![Attacker Attribution](Screenshot:02_failed_attempts_by_source_ip.png)
+  ![Attacker Attribution](screenshots/02_failed_attempts_by_source_ip.png)
 
  ## ⏱ Attack Timeline Analysis
  # Command used:
