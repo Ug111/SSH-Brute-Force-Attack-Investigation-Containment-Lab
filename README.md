@@ -107,7 +107,7 @@ Observation:
 
 Conclusion:
 ✅ Containment successful.
-![Verified Firewall Rule](Screenshot:07_firewall_rule_after_containment.png)
+![Verified Firewall Rule](screenshots/07_firewall_rules_after_containment.png)
 
 ## Persistent Confirmation
 # command used:
