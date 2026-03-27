@@ -117,7 +117,7 @@ Observation:
 • identified root cause (exposed passsword authenticationConclusion: 
 • Recommended defensive improvements (Key-based authentication)
 • IPs appear in saved config
-![Persistent Confirmation](screenshot:08_persistent_firewall_rules.png)
+![Persistent Confirmation](screenshots/08_persistent_firewall_rules.png)
 
 ## 📖 Lesson Learned:
 Starting from log monitoring and analysis, early detection identified numerous attacks but with the effective activation and automation of firewall,
